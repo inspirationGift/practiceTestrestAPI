@@ -1,14 +1,14 @@
 package com.test.example.practice.repository;
 
-import com.test.example.practice.model.DealEntity;
+import com.test.example.practice.model.Deal;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DealRepository extends JpaRepository<DealEntity, Long> {
-    DealEntity findById(long id);
+public interface DealRepository extends PagingAndSortingRepository<Deal, Long> {
+    Deal findById(long id);
 
-    Page<DealEntity> findAll(Pageable page);
+    Page<Deal> findAll(Pageable page);
 }

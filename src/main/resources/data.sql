@@ -1,8 +1,4 @@
 
-
-INSERT INTO client_type (name) VALUES ('INTERNAL');
-INSERT INTO client_type (name) VALUES ('EXTERNAL');
-
 INSERT INTO client (id, type_id, name) VALUES (1, 2, 'knight');
 INSERT INTO client (id, type_id, name) VALUES (1, 1, 'bishop');
 INSERT INTO client (id, type_id, name) VALUES (2, 2, 'queen');
@@ -64,6 +60,9 @@ INSERT INTO payment (status, amount, date_create, invoice_id) VALUES (2, 0.01, '
 INSERT INTO payment (status, amount, date_create, invoice_id) VALUES (2, 99.99, '2021-02-09 16:39:27.000', 3);
 INSERT INTO payment (status, amount, date_create, invoice_id) VALUES (2, 120, '2021-02-09 16:39:38.000', 4);
 
-INSERT INTO payment_status (name) VALUES ('PROCESSING');
-INSERT INTO payment_status (name) VALUES ('ACCEPTED');
-INSERT INTO payment_status (name) VALUES ('REJECTED');
+-- INSERT INTO payment_status (name) VALUES ('PROCESSING');
+-- INSERT INTO payment_status (name) VALUES ('ACCEPTED');
+-- INSERT INTO payment_status (name) VALUES ('REJECTED');
+
+-- INSERT INTO client_type (name) VALUES ('INTERNAL');
+-- INSERT INTO client_type (name) VALUES ('EXTERNAL');

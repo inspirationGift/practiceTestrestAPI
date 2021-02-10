@@ -12,8 +12,8 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "deal", indexes = @Index(columnList = "id DESC", unique = true))
-public class DealEntity {
+@Table(name = "deal")
+public class Deal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -28,6 +28,12 @@ public class DealEntity {
             joinColumns = @JoinColumn(name = "deal_id"),
             inverseJoinColumns = {@JoinColumn(name = "client_id"),
                     @JoinColumn(name = "client_type")})
-    private Set<ClientEntity> client;
+    private Set<Client> client;
+
+    @ManyToOne
+    @JoinTable(name = "invoice",
+            inverseJoinColumns = {@JoinColumn(name = "deal_id", nullable = false)})
+    private Invoice invoice;
+
 
 }
