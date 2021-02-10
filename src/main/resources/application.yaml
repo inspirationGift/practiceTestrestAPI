@@ -6,9 +6,14 @@ spring:
     url: jdbc:mysql://localhost:3306/trade
     data: classpath:data.sql
     initialization-mode: always
+
+
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
+    generate-ddl: true
+    show-sql: true
+
 
 server:
   port: 8000

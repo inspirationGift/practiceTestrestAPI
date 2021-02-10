@@ -1,20 +1,27 @@
 package com.test.example.practice.model.dtos;
 
-import com.test.example.practice.model.ClientEntity;
-import com.test.example.practice.model.InvoiceEntity;
+import com.test.example.practice.model.Deal;
+import com.test.example.practice.model.Invoice;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.time.LocalDateTime;
 import java.util.List;
+
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class DealDto {
-    private long id;
-    private float volume;
-    private LocalDateTime dateCreate;
-    private String type;
-    private List<ClientEntity> clients;
-    private InvoiceEntity invoice;
+    private List<Deal> deals;
+    private Pageable page;
+
+    public void setDeals(Page<Deal> deals) {
+        this.deals = deals.getContent();
+        this.page = deals.getPageable();
+    }
+
+
 }
