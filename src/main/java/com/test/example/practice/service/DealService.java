@@ -1,6 +1,6 @@
 package com.test.example.practice.service;
 
-import com.test.example.practice.exception.NullEntityReferenceException;
+import com.test.example.practice.exception.EntityNotFoundException;
 import com.test.example.practice.model.Deal;
 import com.test.example.practice.model.dtos.DealDto;
 import com.test.example.practice.model.dtos.RequestDealDto;
@@ -19,7 +19,7 @@ public class DealService {
         this.repository = repository;
     }
 
-    public DealDto getAllDeals(RequestDealDto dto) throws NullEntityReferenceException {
+    public DealDto getAllDeals(RequestDealDto dto) throws EntityNotFoundException {
         PageRequest page = PageRequest.of(dto.getPage(), dto.getPageSize(), dto.getSort());
 
         Page<Deal> deals;
@@ -40,8 +40,8 @@ public class DealService {
             deals = repository.findAll(page);
         }
 
-        if (deals == null)
-            throw new NullEntityReferenceException("Not found such deals!");
+        if (deals == null || deals.isEmpty())
+            throw new EntityNotFoundException("Not found such deals!");
 
         DealDto respond = new DealDto();
         respond.setPage(deals.getPageable());
@@ -57,11 +57,11 @@ public class DealService {
         return deals.toList();
     }
 
-    public DealDto getOneDeal(Integer id) throws NullEntityReferenceException {
+    public DealDto getOneDeal(Integer id) throws EntityNotFoundException {
         Deal byId = repository.findById(id);
 
         if (byId == null)
-            throw new NullEntityReferenceException("Not found such deal!");
+            throw new EntityNotFoundException("Not found such deal!");
 
         DealDto respond = new DealDto();
         respond.setDeals(List.of(byId));

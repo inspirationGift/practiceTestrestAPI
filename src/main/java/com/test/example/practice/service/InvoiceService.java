@@ -1,6 +1,6 @@
 package com.test.example.practice.service;
 
-import com.test.example.practice.exception.NullEntityReferenceException;
+import com.test.example.practice.exception.EntityNotFoundException;
 import com.test.example.practice.model.Invoice;
 import com.test.example.practice.model.dtos.DealDto;
 import com.test.example.practice.model.dtos.InvoiceDto;
@@ -20,14 +20,14 @@ public class InvoiceService {
         this.mapper = mapper;
     }
 
-    public InvoiceDto saveInvoice(InvoiceDto dto, int dealId) throws NullEntityReferenceException {
+    public InvoiceDto saveInvoice(InvoiceDto dto, int dealId) throws EntityNotFoundException {
         doesDealExist(dealId);
         dto.setDealId(dealId);
         Invoice map = mapper.map(dto, Invoice.class);
         return mapper.map(repository.save(map), InvoiceDto.class);
     }
 
-    public InvoiceDto updateInvoice(InvoiceDto dto, int dealId, int invoiceId) throws NullEntityReferenceException {
+    public InvoiceDto updateInvoice(InvoiceDto dto, int dealId, int invoiceId) throws EntityNotFoundException {
         doesDealExist(dealId);
         Invoice invoice = doesInvoiceExist(invoiceId);
 
@@ -38,15 +38,15 @@ public class InvoiceService {
         return mapper.map(repository.save(invoice), InvoiceDto.class);
     }
 
-    private boolean doesDealExist(int dealId) throws NullEntityReferenceException {
+    private boolean doesDealExist(int dealId) throws EntityNotFoundException {
         DealDto oneDeal = this.dealService.getOneDeal(dealId);
         return true;
     }
 
-    private Invoice doesInvoiceExist(int invoiceId) throws NullEntityReferenceException {
+    private Invoice doesInvoiceExist(int invoiceId) throws EntityNotFoundException {
         Invoice invoice = this.repository.findById(invoiceId).orElse(null);
         if (invoice == null)
-            throw new NullEntityReferenceException("No such invoice found");
+            throw new EntityNotFoundException("No such invoice found");
         return invoice;
     }
 

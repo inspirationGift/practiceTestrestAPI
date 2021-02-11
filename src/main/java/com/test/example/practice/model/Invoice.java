@@ -42,8 +42,9 @@ public class Invoice {
     @ToString.Exclude
     private List<Payment> payment;
 
-
+    @Transient
     public PaymentStatus getPaymentStatus() {
+        if (this.payment == null || this.payment.isEmpty()) return PaymentStatus.NOT_PAID;
         return PaymentStatus.getStatus(this.payment, this.amount);
     }
 }

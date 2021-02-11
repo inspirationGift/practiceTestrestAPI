@@ -1,4 +1,13 @@
 spring:
+  application:
+    name: test-rest-api
+  profiles:
+    active: dev
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     password: 220984piv
@@ -6,16 +15,34 @@ spring:
     url: jdbc:mysql://localhost:3306/trade
     data: classpath:data.sql
     initialization-mode: always
-
-
   jpa:
     hibernate:
       ddl-auto: create-drop
     generate-ddl: true
     show-sql: true
-
-
 server:
   port: 7000
   servlet:
     context-path: /api
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: 12345
+    username: user
+    url: ${$DB_NAME}
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+
+server:
+  port: ${$DB_PORT}
+  servlet:
+    context-path: /new
+

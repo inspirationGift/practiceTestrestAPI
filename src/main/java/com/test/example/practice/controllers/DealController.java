@@ -1,6 +1,6 @@
 package com.test.example.practice.controllers;
 
-import com.test.example.practice.exception.NullEntityReferenceException;
+import com.test.example.practice.exception.EntityNotFoundException;
 import com.test.example.practice.service.DealService;
 import com.test.example.practice.model.dtos.DealDto;
 import com.test.example.practice.model.dtos.RequestDealDto;
@@ -18,12 +18,12 @@ public class DealController {
     }
 
     @RequestMapping(value = "/id/{id}/", method = RequestMethod.GET)
-    public DealDto getOneDeal(@PathVariable("id") Integer id) throws NullEntityReferenceException {
+    public DealDto getOneDeal(@PathVariable("id") Integer id) throws EntityNotFoundException {
         return this.dealService.getOneDeal(id);
     }
 
     @PostMapping("/")
-    public DealDto getAllDeals(@RequestBody RequestDealDto dto) throws NullEntityReferenceException {
+    public DealDto getAllDeals(@RequestBody RequestDealDto dto) throws EntityNotFoundException {
         return this.dealService.getAllDeals(dto);
     }
 }
