@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
 
 @ControllerAdvice
@@ -18,9 +17,9 @@ public class GlobalExceptionHandler {
 
     Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler(NullEntityReferenceException.class)
+    @ExceptionHandler(EntityNotFoundException.class)
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
-    public ModelAndView nullEntityReferenceExceptionHandler(HttpServletRequest request, NullEntityReferenceException exception) {
+    public ModelAndView nullEntityReferenceExceptionHandler(HttpServletRequest request, EntityNotFoundException exception) {
         return getModelAndView(request, HttpStatus.NOT_FOUND,
                 exception, exception.getLocalizedMessage());
     }

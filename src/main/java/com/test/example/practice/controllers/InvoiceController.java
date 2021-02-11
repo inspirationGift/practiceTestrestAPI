@@ -1,6 +1,6 @@
 package com.test.example.practice.controllers;
 
-import com.test.example.practice.exception.NullEntityReferenceException;
+import com.test.example.practice.exception.EntityNotFoundException;
 import com.test.example.practice.model.dtos.InvoiceDto;
 import com.test.example.practice.service.InvoiceService;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ public class InvoiceController {
     }
 
     @PostMapping("/create/dealId/{dealId}")
-    public InvoiceDto createInvoice(@PathVariable("dealId") Integer id, @RequestBody InvoiceDto invoice) throws NullEntityReferenceException {
+    public InvoiceDto createInvoice(@PathVariable("dealId") Integer id, @RequestBody InvoiceDto invoice) throws EntityNotFoundException {
         return service.saveInvoice(invoice, id);
     }
 
@@ -24,7 +24,7 @@ public class InvoiceController {
     public InvoiceDto updateInvoice(
             @PathVariable("dealId") Integer id,
             @PathVariable("invId") Integer invId,
-            @RequestBody InvoiceDto invoice) throws NullEntityReferenceException {
+            @RequestBody InvoiceDto invoice) throws EntityNotFoundException {
         return service.updateInvoice(invoice, id, invId);
     }
 }
