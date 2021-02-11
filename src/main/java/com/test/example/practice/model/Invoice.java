@@ -21,7 +21,7 @@ public class Invoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true)
-    private long id;
+    private int id;
     @NotNull
     private LocalDateTime dateCreate;
     private LocalDateTime dateUpdate;

@@ -16,7 +16,7 @@ import java.util.Set;
 public class Deal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
     @NotNull
     private float volume;
     private LocalDateTime dateCreate;
