@@ -1,19 +1,14 @@
 package com.test.example.practice.controllers;
 
+import com.test.example.practice.exception.NullEntityReferenceException;
 import com.test.example.practice.service.DealService;
 import com.test.example.practice.model.dtos.DealDto;
 import com.test.example.practice.model.dtos.RequestDealDto;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
-@RequestMapping(name = "api/deal",
-        consumes = "application/json",
-        produces = "application/json")
+@RequestMapping(name = "deal")
 public class DealController {
 
     private final DealService dealService;
@@ -22,10 +17,13 @@ public class DealController {
         this.dealService = dealService;
     }
 
-
-    @PostMapping("/")
-    public DealDto getAllDeals(@RequestBody RequestDealDto dto) {
-        return this.dealService.getAllDeals(dto);
+    @RequestMapping(value = "/id/{id}/", method = RequestMethod.GET)
+    public DealDto getOneDeal(@PathVariable("id") Integer id) throws NullEntityReferenceException {
+        return this.dealService.getOneDeal(id);
     }
 
+    @PostMapping("/")
+    public DealDto getAllDeals(@RequestBody RequestDealDto dto) throws NullEntityReferenceException {
+        return this.dealService.getAllDeals(dto);
+    }
 }

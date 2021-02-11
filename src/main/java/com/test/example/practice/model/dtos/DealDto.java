@@ -17,11 +17,5 @@ import java.util.List;
 public class DealDto {
     private List<Deal> deals;
     private Pageable page;
-
-    public void setDeals(Page<Deal> deals) {
-        this.deals = deals.getContent();
-        this.page = deals.getPageable();
-    }
-
-
+    private int total;
 }

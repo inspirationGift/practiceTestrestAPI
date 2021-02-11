@@ -12,12 +12,12 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "payment", indexes = {@Index(columnList = "id,amount ASC", unique = true)})
+@Table(name = "payment")
 public class Payment {
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     @NotNull
     private int status;
@@ -29,6 +29,9 @@ public class Payment {
     private float amount;
     @NotNull
     private LocalDateTime dateCreate;
+
+    @Column(name = "invoice_id")
+    private int invoiceId;
 
     public PaymentAcceptance getAcceptanceStatus() {
         return PaymentAcceptance.getStatus(this.status);
