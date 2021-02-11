@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -30,10 +31,8 @@ public class Deal {
                     @JoinColumn(name = "client_type")})
     private Set<Client> client;
 
-    @ManyToOne
-    @JoinTable(name = "invoice",
-            inverseJoinColumns = {@JoinColumn(name = "deal_id", nullable = false)})
-    private Invoice invoice;
-
+    @OneToMany
+    @JoinColumn(referencedColumnName = "id", name = "deal_id")
+    private List<Invoice> invoice;
 
 }

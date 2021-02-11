@@ -1,7 +1,12 @@
 package com.test.example.practice.exception;
 
+import lombok.Data;
+
+
 public class NullEntityReferenceException extends Exception {
-    public NullEntityReferenceException(String message) {
-        super(message);
+
+    public NullEntityReferenceException(String hint) {
+        super(hint);
     }
+
 }

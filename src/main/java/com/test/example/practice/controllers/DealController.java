@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping(name = "api/deal",
-        consumes = "application/json",
-        produces = "application/json")
+@RequestMapping(name = "deal")
 public class DealController {
 
     private final DealService dealService;
@@ -19,14 +17,13 @@ public class DealController {
         this.dealService = dealService;
     }
 
+    @RequestMapping(value = "/id/{id}/", method = RequestMethod.GET)
+    public DealDto getOneDeal(@PathVariable("id") Integer id) throws NullEntityReferenceException {
+        return this.dealService.getOneDeal(id);
+    }
+
     @PostMapping("/")
     public DealDto getAllDeals(@RequestBody RequestDealDto dto) throws NullEntityReferenceException {
         return this.dealService.getAllDeals(dto);
     }
-
-    @GetMapping("/{dealId}")
-    public DealDto getOneDeals(@PathVariable("dealId") int id) throws NullEntityReferenceException {
-        return this.dealService.getOne(id);
-    }
-
 }

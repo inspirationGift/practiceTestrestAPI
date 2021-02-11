@@ -40,7 +40,8 @@ public class DealService {
             deals = repository.findAll(page);
         }
 
-        if (deals == null) throw new NullEntityReferenceException("not found data by parameters!");
+        if (deals == null)
+            throw new NullEntityReferenceException("Not found such deals!");
 
         DealDto respond = new DealDto();
         respond.setPage(deals.getPageable());
@@ -56,10 +57,11 @@ public class DealService {
         return deals.toList();
     }
 
-    public DealDto getOne(int id) throws NullEntityReferenceException {
+    public DealDto getOneDeal(Integer id) throws NullEntityReferenceException {
         Deal byId = repository.findById(id);
 
-        if (byId == null) throw new NullEntityReferenceException("not found data by parameters!");
+        if (byId == null)
+            throw new NullEntityReferenceException("Not found such deal!");
 
         DealDto respond = new DealDto();
         respond.setDeals(List.of(byId));
