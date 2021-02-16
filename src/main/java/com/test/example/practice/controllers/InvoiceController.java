@@ -6,7 +6,7 @@ import com.test.example.practice.service.InvoiceService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("invoice")
+@RequestMapping("invoices")
 public class InvoiceController {
 
     private final InvoiceService service;
@@ -15,15 +15,15 @@ public class InvoiceController {
         this.service = service;
     }
 
-    @PostMapping("/create/dealId/{dealId}")
-    public InvoiceDto createInvoice(@PathVariable("dealId") Integer id, @RequestBody InvoiceDto invoice) throws EntityNotFoundException {
+    @PostMapping("/deal_id/{deal_id}")
+    public InvoiceDto createInvoice(@PathVariable("deal_id") Integer id, @RequestBody InvoiceDto invoice) throws EntityNotFoundException {
         return service.saveInvoice(invoice, id);
     }
 
-    @PutMapping("/update/dealId/{dealId}/invoice/{invId}")
+    @PutMapping("/deal_id/{deal_id}/invoice/{invoice_id}")
     public InvoiceDto updateInvoice(
-            @PathVariable("dealId") Integer id,
-            @PathVariable("invId") Integer invId,
+            @PathVariable("deal_id") Integer id,
+            @PathVariable("invoice_id") Integer invId,
             @RequestBody InvoiceDto invoice) throws EntityNotFoundException {
         return service.updateInvoice(invoice, id, invId);
     }
